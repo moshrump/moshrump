@@ -1,124 +1,127 @@
-name: Metrics
-on:
-  # Schedule daily updates
-  schedule: [{cron: "0 16 * * *"}]
-  # (optional) Run workflow manually
-  workflow_dispatch:
-  # (optional) Run workflow when pushing on master/main
-  push: {branches: ["master", "main"]}
-
-jobs:
-  github-metrics:
-    runs-on: ubuntu-latest
-    environment: 
-      name: production
-    permissions:
-      contents: write
-    steps:   
-      - name: 🦑 General
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: general.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: header
-          plugin_isocalendar: yes
-          
-          
-      - name: 🦑 Achievements
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: achievements.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          output_action: gist
-          plugin_achievements: yes
-          plugin_achievements_limit: 6
-          plugin_achievements_display: detailed
-          plugin_fortune: yes
-
-      - name: 🦑 Topics
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: topics.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_topics: yes
-          plugin_topics_mode: icons
-      
-      - name: 🦑 most_Languages
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: most_languages.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_languages: yes
-          commits_authoring: Victor Danilov, Victor-Danilov, victordanilov@outlook.it
-          plugin_languages_details: bytes-size, percentage
-          plugin_languages_limit: 10
-          
-
-      - name: 🦑 Stars
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: stars.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_stars: yes
-          plugin_stars_limit: 3
-
-      - name: 🦑 Activity
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: activity.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_activity: yes
-          plugin_activity_limit: 5
-          plugin_activity_visibility: public
-          plugin_activity_ignored: Victor-Danilov
-
-      - name: 🦑 StarList
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
-        with:
-          filename: star_list.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_starlists: yes
-          plugin_starlists_languages: yes
-          plugin_starlists_limit_languages: 8
-          plugin_starlists_limit_repositories: 0
-
-      - name: 🦑 Profile and detailed game history
-        uses: lowlighter/metrics@latest
-        with:
-          filename: metrics.plugin.steam.full.svg
-          token: NOT_NEEDED
-          base: ""
-          plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
-          plugin_steam: yes
-          plugin_steam_user: "0"
-
-
-      #- name: 🦑 Music
-      #  if: ${{ success() || failure() }}
-      #  uses: lowlighter/metrics@latest
-      #  with:
-      #    filename: music.svg
-      #    token: ${{ secrets.METRICS_TOKEN }}
-      #    base: ""
-      #    plugin_music: yes
-      #    plugin_music_provider: spotify
-      #    plugin_music_user: victordanilov@outlook.it
-      #    plugin_music_mode: recent
-      #    plugin_music_limit: 3
-      #    plugin_music_token: ${{ secrets.SPOTIFY_CLIENT_ID }}, ${{ secrets.SPOTIFY_CLIENT_SECRET }}, ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
-                  
+- name: Metrics embed
+  uses: lowlighter/metrics@v3.34
+  
+#name: Metrics
+#on:
+#  # Schedule daily updates
+#  schedule: [{cron: "0 16 * * *"}]
+#  # (optional) Run workflow manually
+#  workflow_dispatch:
+#  # (optional) Run workflow when pushing on master/main
+#  push: {branches: ["master", "main"]}
+#
+#jobs:
+#  github-metrics:
+#    runs-on: ubuntu-latest
+#    environment: 
+#      name: production
+#    permissions:
+#      contents: write
+#    steps:   
+#      - name: 🦑 General
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: general.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: header
+#          plugin_isocalendar: yes
+#          
+#          
+#      - name: 🦑 Achievements
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: achievements.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: ""
+#          output_action: gist
+#          plugin_achievements: yes
+#          plugin_achievements_limit: 6
+#          plugin_achievements_display: detailed
+#          plugin_fortune: yes
+#
+#      - name: 🦑 Topics
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: topics.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: ""
+#          plugin_topics: yes
+#          plugin_topics_mode: icons
+#      
+#      - name: 🦑 most_Languages
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: most_languages.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: ""
+#          plugin_languages: yes
+#          commits_authoring: Victor Danilov, Victor-Danilov, victordanilov@outlook.it
+#          plugin_languages_details: bytes-size, percentage
+#          plugin_languages_limit: 10
+#          
+#
+#      - name: 🦑 Stars
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: stars.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: ""
+#          plugin_stars: yes
+#          plugin_stars_limit: 3
+#
+#      - name: 🦑 Activity
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: activity.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: ""
+#          plugin_activity: yes
+#          plugin_activity_limit: 5
+#          plugin_activity_visibility: public
+#          plugin_activity_ignored: Victor-Danilov
+#
+#      - name: 🦑 StarList
+#        if: ${{ success() || failure() }}
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: star_list.svg
+#          token: ${{ secrets.METRICS_TOKEN }}
+#          base: ""
+#          plugin_starlists: yes
+#          plugin_starlists_languages: yes
+#          plugin_starlists_limit_languages: 8
+#          plugin_starlists_limit_repositories: 0
+#
+#      - name: 🦑 Profile and detailed game history
+#        uses: lowlighter/metrics@latest
+#        with:
+#          filename: metrics.plugin.steam.full.svg
+#          token: NOT_NEEDED
+#          base: ""
+#          plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
+#          plugin_steam: yes
+#          plugin_steam_user: "0"
+#
+#
+#      #- name: 🦑 Music
+#      #  if: ${{ success() || failure() }}
+#      #  uses: lowlighter/metrics@latest
+#      #  with:
+#      #    filename: music.svg
+#      #    token: ${{ secrets.METRICS_TOKEN }}
+#      #    base: ""
+#      #    plugin_music: yes
+#      #    plugin_music_provider: spotify
+#      #    plugin_music_user: victordanilov@outlook.it
+#      #    plugin_music_mode: recent
+#      #    plugin_music_limit: 3
+#      #    plugin_music_token: ${{ secrets.SPOTIFY_CLIENT_ID }}, ${{ secrets.SPOTIFY_CLIENT_SECRET }}, ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+#
           
 
